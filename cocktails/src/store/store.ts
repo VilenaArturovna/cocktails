@@ -1,9 +1,9 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {appReducer} from "../reducers/reducers";
+import {drinkReducer} from "../reducers/drink-reducer";
 import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
-    app: appReducer
+    app: drinkReducer
 })
 export const store = createStore(rootReducer, applyMiddleware(thunk))
 

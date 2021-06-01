@@ -81,14 +81,6 @@ export type DrinkType = {
     strCreativeCommonsConfirmed: string | null
     dateModified: string | null
 }
-type IngredientType = {
-    idIngredientidIngredient: string
-    strIngredient: string | null
-    strDescription: string | null
-    strType: string | null
-    strAlcohol: string | null
-    strABV: string | null
-}
 type FilteredDrinksType = Array<{
     strDrink: string
     strDrinkThumb: string | null
