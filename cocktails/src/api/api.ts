@@ -5,9 +5,6 @@ import {IngredientType} from "../components/Ingredient";
 const instance = axios.create({
     baseURL: 'https://www.thecocktaildb.com/api/json/v1/1'
 })
-const instanceImage = axios.create({
-    baseURL: 'https://www.thecocktaildb.com/images'
-})
 
 export const drinkAPI = {
     getDrinkByID(id: string) {
@@ -16,6 +13,9 @@ export const drinkAPI = {
     getRandomDrink() {
         return instance.get<{ drinks: Array<DrinkType> }>('/random.php')
     },
+    searchDrinks(word: string) {
+        return instance.get<{ drinks: Array<DrinkType> }>('/search.php?s=' + word)
+    }
 }
 
 export type SizeIngredientPhotoType = '-Small' | '-Medium' | ''
@@ -26,7 +26,4 @@ export const ingredientAPI = {
     getIngredientByName(name: string) {
         return instance.get<{ ingredients: Array<IngredientType> }>('/search.php?i=' + name)
     },
-    getPhotoIngredient(name: string, sizePhoto: SizeIngredientPhotoType) {
-        return instanceImage.get<string>(`/ingredients/${name}${sizePhoto}.png`)
-    }
 }

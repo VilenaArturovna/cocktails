@@ -1,11 +1,11 @@
 import {Dispatch} from "redux";
-import {drinkAPI, ingredientAPI, SizeIngredientPhotoType} from "../api/api";
+import {drinkAPI, ingredientAPI} from "../api/api";
 import {DrinkType} from "../state/state";
-import {IngredientEntityType, IngredientType} from "../components/Ingredient";
+import {IngredientType} from "../components/Ingredient";
 
 type StateType = {
     drinks: Array<DrinkType>
-    ingredients: Array<IngredientEntityType>
+    ingredients: Array<IngredientType>
 }
 
 const initialState: StateType = {
@@ -21,15 +21,19 @@ export const drinkReducer = (state = initialState, action: ActionsType) => {
         case "SET-INGREDIENT": {
             return {...state, ingredients: [...state.ingredients, action.ingredient]}
         }
+        case "SET-FOUND-DRINKS": {
+            return {...state, drinks: action.drinks}
+        }
         default:
             return state
     }
 }
-type ActionsType = ReturnType<typeof setDrink> | ReturnType<typeof setIngredient>
+type ActionsType = ReturnType<typeof setDrink> | ReturnType<typeof setIngredient> | ReturnType<typeof setFoundDrinks>
 
 //Action Creators
 export const setDrink = (drink: DrinkType) => ({type: 'SET-DRINK', drink} as const)
-export const setIngredient = (ingredient: IngredientEntityType) => ({type: 'SET-INGREDIENT', ingredient} as const)
+export const setIngredient = (ingredient: IngredientType) => ({type: 'SET-INGREDIENT', ingredient} as const)
+export const setFoundDrinks = (drinks: Array<DrinkType>) => ({type: 'SET-FOUND-DRINKS', drinks} as const)
 
 
 //Thunk Creators
@@ -41,24 +45,11 @@ export const getRandomDrink = () => async (dispatch: Dispatch) => {
     const res = await drinkAPI.getRandomDrink()
     dispatch(setDrink(res.data.drinks[0]))
 }
-
 export const getIngredientTC = (name: string) => async (dispatch: Dispatch) => {
-    const info = ingredientAPI.getIngredientByName(name)
-    const photo = ingredientAPI.getPhotoIngredient(name, '-Small')
-    const res = await Promise.all([info, photo])
-    const ingr = res[0].data.ingredients[0]
-    const photoIngr = res[1].data
-
-    const ingredient: IngredientEntityType = {
-        idIngredient: ingr.idIngredient,
-        strIngredient: ingr.strIngredient,
-        strDescription: ingr.strDescription,
-        strABV: ingr.strABV,
-        strAlcohol: ingr.strAlcohol,
-        strType: ingr.strType,
-        photo: photoIngr}
-    console.log(photoIngr)
-    debugger
-    dispatch(setIngredient(ingredient))
-
+    const res = await ingredientAPI.getIngredientByName(name)
+    dispatch(setIngredient(res.data.ingredients[0]))
+}
+export const searchDrinksTC = (word: string) => async (dispatch: Dispatch) => {
+    const res = await drinkAPI.searchDrinks(word)
+    dispatch(setFoundDrinks(res.data.drinks))
 }

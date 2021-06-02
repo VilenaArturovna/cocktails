@@ -16,11 +16,10 @@ export type IngredientType = {
     strAlcohol: string | null
     strABV: string | null
 }
-export type IngredientEntityType = IngredientType & {photo: string}
 
 export const Ingredient = () => {
     const {name}: ParamsType = useParams()
-    const ingredient = useSelector<RootStateType, IngredientEntityType>(state => state.app.ingredients[0])
+    const ingredient = useSelector<RootStateType, IngredientType>(state => state.app.ingredients[0])
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -32,7 +31,8 @@ export const Ingredient = () => {
             {ingredient &&
             <div>
                 <h2>{ingredient.strIngredient}</h2>
-                <img src={`data:image/png;base64,${ingredient.photo}`} alt=""/>
+                <img src={`https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient}-Medium.png`}
+                     alt=""/>
                 <div>{ingredient.strDescription}</div>
             </div>
             }
