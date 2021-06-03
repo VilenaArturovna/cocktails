@@ -1,4 +1,4 @@
-import {Drink} from "./Drink";
+import {Drink} from "./Drink/Drink";
 import {useDispatch, useSelector} from "react-redux";
 import {getRandomDrink} from "../reducers/drink-reducer";
 import {RootStateType} from "../store/store";
@@ -9,9 +9,11 @@ export const Main = () => {
     const dispatch = useDispatch()
     const drink = useSelector<RootStateType, DrinkType>(state => state.app.drinks[0])
 
+
+
     useEffect(() => {
         dispatch(getRandomDrink())
-    }, [dispatch])
+    }, )
 
     return (
         <div>

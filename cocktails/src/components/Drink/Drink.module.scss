@@ -1,0 +1,32 @@
+.drink {
+  width: 100%;
+
+  .drinkAndIngredients {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+
+    .ingredients {
+      display: flex;
+
+      a {
+        text-decoration: none;
+
+
+
+      .ingredientItem {
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+
+        img {
+          width: 100px;
+        }
+
+        span {
+          color: darksalmon;
+        }}
+      }
+    }
+  }
+}

@@ -1,9 +1,14 @@
-.header {
-  background-color: darkred;
-  height: auto;
-  width: 100%;
-  img {
-    padding-top: 5px;
-    padding-bottom: 5px;
+.app{
+  background-color: #230312;
+  color: white;
+  height: 100vh;
+  .header {
+    background-color: #1d000d;
+    height: auto;
+    width: 100%;
+    img {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
   }
 }
