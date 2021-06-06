@@ -11,12 +11,12 @@ type ParamsType = {
 
 export const List = () => {
     const {list}: ParamsType = useParams()
-    const filter = useSelector<RootStateType, Array<{strCategory: string }>>(state => state.app.lists)
+    const filter = useSelector<RootStateType, Array<{ strCategory: string }>>(state => state.app.lists)
     const dispatch = useDispatch()
-debugger
-    useEffect(()=>{
+    debugger
+    useEffect(() => {
         debugger
-        for (let i = 0; i<lists.length; i++) {
+        for (let i = 0; i < lists.length; i++) {
             if (list === lists[i].name) {
                 dispatch(getList(lists[i].letterForFilter))
                 break

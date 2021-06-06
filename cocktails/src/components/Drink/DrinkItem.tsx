@@ -7,6 +7,7 @@ import spain from "../../Assets/Icons/spain.png";
 import germany from "../../Assets/Icons/germany.png";
 import france from "../../Assets/Icons/france.png";
 import italy from "../../Assets/Icons/italy.png";
+
 type PropsType = {
     drink: DrinkType
 }
@@ -76,10 +77,10 @@ export const DrinkItem = ({drink}: PropsType) => {
                         <h3>Instruction</h3>
                         <div className={style.flags}>
                             {instructions.map((instr, i) => instr.instruction &&
-                            <div key={i} onClick={() => setInstruction(instr.instruction)}>
-                                <img src={instr.language} alt="language" style={{'width': '32px'}}/>
-                            </div>
-                        )}
+                                <div key={i} onClick={() => setInstruction(instr.instruction)}>
+                                    <img src={instr.language} alt="language" style={{'width': '32px'}}/>
+                                </div>
+                            )}
                         </div>
                         <p>{instruction}</p>
                     </div>

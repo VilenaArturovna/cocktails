@@ -32,6 +32,6 @@ export const ingredientAPI = {
 
 export const listAPI = {
     getList(letter: string) {
-        return instance.get<{ drinks: Array<{strCategory: string }> }>(`/list.php?${letter}=list`)
+        return instance.get<{ drinks: Array<{ strCategory: string }> }>(`/list.php?${letter}=list`)
     }
 }

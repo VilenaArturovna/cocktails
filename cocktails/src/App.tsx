@@ -15,7 +15,7 @@ function App() {
             <header className={style.header}>
                 <div className={styles.container}>
                     <NavLink to={'/'}><img src="https://www.thecocktaildb.com/images/logo.png" alt=""/></NavLink>
-                    <SearchDrink />
+                    <SearchDrink/>
                 </div>
             </header>
             <div className={styles.container}>

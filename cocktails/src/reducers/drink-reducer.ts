@@ -7,7 +7,7 @@ type StateType = {
     drinks: Array<DrinkType>
     drinksPreview: Array<DrinkMiniType>
     ingredients: Array<IngredientType>
-    lists: Array<{strCategory: string }>
+    lists: Array<{ strCategory: string }>
 }
 
 const initialState: StateType = {
@@ -29,7 +29,7 @@ export const drinkReducer = (state = initialState, action: ActionsType) => {
             return {...state, drinks: action.drinks}
         }
         case "SET-DRINKS-BY-INGREDIENT": {
-            return {...state, drinksPreview:action.drinks}
+            return {...state, drinksPreview: action.drinks}
         }
 
         case "SET-LIST": {
@@ -50,8 +50,11 @@ type ActionsType = ReturnType<typeof setDrink>
 export const setDrink = (drink: DrinkType) => ({type: 'SET-DRINK', drink} as const)
 export const setIngredient = (ingredient: IngredientType) => ({type: 'SET-INGREDIENT', ingredient} as const)
 export const setFoundDrinks = (drinks: Array<DrinkType>) => ({type: 'SET-FOUND-DRINKS', drinks} as const)
-export const setDrinksByIngredient = (drinks: Array<DrinkMiniType>) => ({type: 'SET-DRINKS-BY-INGREDIENT', drinks} as const)
-export const setList = (lists: Array<{strCategory: string }>) => ({type: 'SET-LIST', lists} as const)
+export const setDrinksByIngredient = (drinks: Array<DrinkMiniType>) => ({
+    type: 'SET-DRINKS-BY-INGREDIENT',
+    drinks
+} as const)
+export const setList = (lists: Array<{ strCategory: string }>) => ({type: 'SET-LIST', lists} as const)
 
 //Thunk Creators
 export const getDrinkByID = (id: string) => async (dispatch: Dispatch) => {
