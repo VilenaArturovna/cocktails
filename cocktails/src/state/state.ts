@@ -81,6 +81,11 @@ export type DrinkType = {
     strCreativeCommonsConfirmed: string | null
     dateModified: string | null
 }
+export type DrinkMiniType = {
+    strDrink: string
+    strDrinkThumb: string
+    idDrink: string
+}
 type FilteredDrinksType = Array<{
     strDrink: string
     strDrinkThumb: string | null

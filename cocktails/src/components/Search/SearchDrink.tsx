@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from "react";
 import {useDispatch} from "react-redux";
-import {searchDrinksTC} from "../reducers/drink-reducer";
+import {searchDrinksTC} from "../../reducers/drink-reducer";
 import {NavLink} from "react-router-dom";
 
 export const SearchDrink = () => {
@@ -15,6 +15,7 @@ export const SearchDrink = () => {
 
     const clickHandler = () => {
         dispatch(searchDrinksTC(value))
+        debugger
         setValue('')
     }
 
@@ -22,7 +23,7 @@ export const SearchDrink = () => {
         <div>
             <form action="">
                 <input type="text" value={value} onChange={changeHandler}/>
-                <NavLink to={'/SearchResults'} ><button onClick={clickHandler}>Search</button> </NavLink>
+                <NavLink to={'/cocktails/SearchResults'} ><button onClick={clickHandler}>Search</button> </NavLink>
             </form>
         </div>
     )

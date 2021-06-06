@@ -1,0 +1,27 @@
+.searchResults {
+  h2 {
+    text-align: center;
+  }
+
+  .drinksBlock {
+    display: flex;
+    flex-wrap: wrap;
+
+    .drinkBlock {
+
+      a {
+        text-decoration: none;
+
+        .drink {
+          margin: 10px;
+          width: 200px;
+
+          p {
+            color: darksalmon;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

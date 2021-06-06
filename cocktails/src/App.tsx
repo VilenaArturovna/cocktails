@@ -1,12 +1,13 @@
 import React from 'react';
 import style from './App.module.scss';
-import {Main} from "./components/Main";
+import {Main} from "./components/Main/Main";
 import {Route, NavLink} from "react-router-dom";
 import {Drink} from "./components/Drink/Drink";
-import {Ingredient} from "./components/Ingredient";
+import {Ingredient} from "./components/Ingredient/Ingredient";
 import styles from './style/Container.module.scss'
-import {SearchDrink} from "./components/SearchDrink";
-import {SearchResults} from "./components/SearchResults";
+import {SearchDrink} from "./components/Search/SearchDrink";
+import {SearchResults} from "./components/Search/SearchResults";
+import {List} from "./components/List/List";
 
 function App() {
     return (
@@ -19,9 +20,10 @@ function App() {
             </header>
             <div className={styles.container}>
                 <Route exact path={'/'} render={() => <Main/>}/>
-                <Route path={'/drink/:id'} render={() => <Drink/>}/>
-                <Route path={'/ingredient/:name'} render={() => <Ingredient/>}/>
-                <Route path={'/SearchResults'} render={() => <SearchResults/>}/>
+                <Route path={'/cocktails/drink/:id'} render={() => <Drink/>}/>
+                <Route path={'/cocktails/ingredient/:name'} render={() => <Ingredient/>}/>
+                <Route path={'/cocktails/SearchResults'} render={() => <SearchResults/>}/>
+                <Route path={'/cocktails/lists/:list'} render={() => <List/>}/>
             </div>
         </div>
     )

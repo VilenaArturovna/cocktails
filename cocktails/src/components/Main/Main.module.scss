@@ -1,0 +1,14 @@
+.main{
+  .lists {
+    text-align: center;
+    a {
+      padding-left: 20px;
+      padding-right: 20px;
+      color: darksalmon;
+    }
+  }
+  .randomDrink {
+    display: flex;
+    flex-direction: column;
+  }
+}

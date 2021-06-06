@@ -1,16 +1,20 @@
 import {Dispatch} from "redux";
-import {drinkAPI, ingredientAPI} from "../api/api";
-import {DrinkType} from "../state/state";
-import {IngredientType} from "../components/Ingredient";
+import {drinkAPI, ingredientAPI, listAPI} from "../api/api";
+import {DrinkMiniType, DrinkType} from "../state/state";
+import {IngredientType} from "../components/Ingredient/Ingredient";
 
 type StateType = {
     drinks: Array<DrinkType>
+    drinksPreview: Array<DrinkMiniType>
     ingredients: Array<IngredientType>
+    lists: Array<{strCategory: string }>
 }
 
 const initialState: StateType = {
     drinks: [],
-    ingredients: []
+    drinksPreview: [],
+    ingredients: [],
+    lists: []
 }
 
 export const drinkReducer = (state = initialState, action: ActionsType) => {
@@ -24,17 +28,30 @@ export const drinkReducer = (state = initialState, action: ActionsType) => {
         case "SET-FOUND-DRINKS": {
             return {...state, drinks: action.drinks}
         }
+        case "SET-DRINKS-BY-INGREDIENT": {
+            return {...state, drinksPreview:action.drinks}
+        }
+
+        case "SET-LIST": {
+            debugger
+            return {...state, lists: action.lists}
+        }
         default:
             return state
     }
 }
-type ActionsType = ReturnType<typeof setDrink> | ReturnType<typeof setIngredient> | ReturnType<typeof setFoundDrinks>
+type ActionsType = ReturnType<typeof setDrink>
+    | ReturnType<typeof setIngredient>
+    | ReturnType<typeof setFoundDrinks>
+    | ReturnType<typeof setDrinksByIngredient>
+    | ReturnType<typeof setList>
 
 //Action Creators
 export const setDrink = (drink: DrinkType) => ({type: 'SET-DRINK', drink} as const)
 export const setIngredient = (ingredient: IngredientType) => ({type: 'SET-INGREDIENT', ingredient} as const)
 export const setFoundDrinks = (drinks: Array<DrinkType>) => ({type: 'SET-FOUND-DRINKS', drinks} as const)
-
+export const setDrinksByIngredient = (drinks: Array<DrinkMiniType>) => ({type: 'SET-DRINKS-BY-INGREDIENT', drinks} as const)
+export const setList = (lists: Array<{strCategory: string }>) => ({type: 'SET-LIST', lists} as const)
 
 //Thunk Creators
 export const getDrinkByID = (id: string) => async (dispatch: Dispatch) => {
@@ -50,6 +67,16 @@ export const getIngredientTC = (name: string) => async (dispatch: Dispatch) => {
     dispatch(setIngredient(res.data.ingredients[0]))
 }
 export const searchDrinksTC = (word: string) => async (dispatch: Dispatch) => {
+    debugger
     const res = await drinkAPI.searchDrinks(word)
     dispatch(setFoundDrinks(res.data.drinks))
+}
+export const getDrinksByIngredient = (ingredient: string) => async (dispatch: Dispatch) => {
+    const res = await drinkAPI.getDrinksByIngredient(ingredient)
+    dispatch(setDrinksByIngredient(res.data.drinks))
+}
+export const getList = (letter: string) => async (dispatch: Dispatch) => {
+    const res = await listAPI.getList(letter)
+    debugger
+    dispatch(setList(res.data.drinks))
 }

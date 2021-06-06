@@ -3,29 +3,52 @@
 
   .drinkAndIngredients {
     display: flex;
+    flex-direction: column;
     text-align: center;
-    justify-content: space-around;
 
-    .ingredients {
+    .drinkBlock {
       display: flex;
+      flex-direction: row;
+      justify-content: space-around;
 
-      a {
-        text-decoration: none;
-
-
-
-      .ingredientItem {
+      .ingredients {
         display: flex;
-        flex-direction: column;
-        width: 100px;
+        flex-wrap: wrap;
 
-        img {
-          width: 100px;
+        a {
+          text-decoration: none;
+
+
+          .ingredientItem {
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+
+            img {
+              width: 100px;
+            }
+
+            span {
+              color: darksalmon;
+            }
+          }
         }
+      }
+    }
+  }
 
-        span {
-          color: darksalmon;
-        }}
+  .instruction {
+    margin-top: 30px;
+    text-align: center;
+
+    .flags {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      div {
+        margin-left: 10px;
+        margin-right: 10px;
       }
     }
   }
