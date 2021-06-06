@@ -27,7 +27,7 @@ export const Drink = (props: PropsType) => {
     }, [dispatch, id, props.id])
 
     return (
-        <div>
+        <div style={{'width':'100%'}}>
             {drink && <DrinkItem drink={drink}/>}
         </div>
     )
