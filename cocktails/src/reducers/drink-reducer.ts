@@ -8,19 +8,21 @@ type StateType = {
     drinksPreview: Array<DrinkMiniType>
     ingredients: Array<IngredientType>
     lists: Array<{ strCategory: string }>
+    isUploaded: boolean
 }
 
 const initialState: StateType = {
     drinks: [],
     drinksPreview: [],
     ingredients: [],
-    lists: []
+    lists: [],
+    isUploaded: false
 }
 
 export const drinkReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
         case "SET-DRINK": {
-            return {...state, drinks: [...state.drinks, action.drink]}
+            return {...state, drinks: [action.drink, ...state.drinks]}
         }
         case "SET-INGREDIENT": {
             return {...state, ingredients: [...state.ingredients, action.ingredient]}
@@ -31,10 +33,11 @@ export const drinkReducer = (state = initialState, action: ActionsType) => {
         case "SET-DRINKS-BY-INGREDIENT": {
             return {...state, drinksPreview: action.drinks}
         }
-
         case "SET-LIST": {
-            debugger
             return {...state, lists: action.lists}
+        }
+        case "SET-IS-UPLOADED": {
+            return {...state, isUploaded: action.isUploaded}
         }
         default:
             return state
@@ -45,6 +48,7 @@ type ActionsType = ReturnType<typeof setDrink>
     | ReturnType<typeof setFoundDrinks>
     | ReturnType<typeof setDrinksByIngredient>
     | ReturnType<typeof setList>
+    | ReturnType<typeof setIsUploaded>
 
 //Action Creators
 export const setDrink = (drink: DrinkType) => ({type: 'SET-DRINK', drink} as const)
@@ -55,10 +59,13 @@ export const setDrinksByIngredient = (drinks: Array<DrinkMiniType>) => ({
     drinks
 } as const)
 export const setList = (lists: Array<{ strCategory: string }>) => ({type: 'SET-LIST', lists} as const)
+export const setIsUploaded = (isUploaded: boolean) => ({type:'SET-IS-UPLOADED', isUploaded} as const)
 
 //Thunk Creators
 export const getDrinkByID = (id: string) => async (dispatch: Dispatch) => {
+    dispatch(setIsUploaded(false))
     const res = await drinkAPI.getDrinkByID(id)
+    dispatch(setIsUploaded(true))
     dispatch(setDrink(res.data.drinks[0]))
 }
 export const getRandomDrink = () => async (dispatch: Dispatch) => {

@@ -15,7 +15,7 @@ type PropsType = {
 
 export const Drink = (props: PropsType) => {
     const {id}: ParamsType = useParams()
-    const drink = useSelector<RootStateType, DrinkType>(state => state.app.drinks[state.app.drinks.length - 1])
+    const drink = useSelector<RootStateType, DrinkType>(state => state.app.drinks[0])
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export const Drink = (props: PropsType) => {
     }, [dispatch, id, props.id])
 
     return (
-        <div style={{'width':'100%'}}>
+        <div style={{'width': '100%'}}>
             {drink && <DrinkItem drink={drink}/>}
         </div>
     )

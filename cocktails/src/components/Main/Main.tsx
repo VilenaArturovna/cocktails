@@ -32,7 +32,7 @@ export const Main = () => {
 
     useEffect(() => {
             dispatch(getRandomDrink())
-        },
+        }, [dispatch]
     )
 
     return (
@@ -42,6 +42,7 @@ export const Main = () => {
                     return <NavLink key={index} to={`/cocktails/lists/${l.name}`}>{l.name}</NavLink>
                 })}
             </div>
+
             <div className={`${styles.container} ${style.randomDrink}`}>
                 <h2>Random cocktail</h2>
                 {drink &&

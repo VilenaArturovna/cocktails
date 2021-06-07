@@ -7,6 +7,9 @@ import spain from "../../Assets/Icons/spain.png";
 import germany from "../../Assets/Icons/germany.png";
 import france from "../../Assets/Icons/france.png";
 import italy from "../../Assets/Icons/italy.png";
+import {useSelector} from "react-redux";
+import {RootStateType} from "../../store/store";
+import {Preloader} from "../../Assets/Preloader";
 
 type PropsType = {
     drink: DrinkType
@@ -22,6 +25,9 @@ type InstructionForArrayType = {
 
 export const DrinkItem = ({drink}: PropsType) => {
     const [instruction, setInstruction] = useState(drink.strInstructions)
+    const isUploaded = useSelector<RootStateType, boolean>(state => state.app.isUploaded)
+
+
     const ingredients: Array<IngredientForArrayType> = [
         {ingredient: drink.strIngredient1, measure: drink.strMeasure1},
         {ingredient: drink.strIngredient2, measure: drink.strMeasure2},
@@ -46,9 +52,13 @@ export const DrinkItem = ({drink}: PropsType) => {
         {instruction: drink.strInstructionsFR, language: france},
         {instruction: drink.strInstructionsIT, language: italy}
     ]
+
+    if (!isUploaded) {
+        return <Preloader/>
+    }
     return (
         <div className={style.drink}>
-            {drink &&
+            {drink && isUploaded &&
             <div>
                 <div className={style.drinkAndIngredients}>
                     <h2>{drink.strDrink}</h2>
